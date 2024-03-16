@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Login from "./components/Login/Login";
 import { useStateProvider } from "./utils/StateProvider";
 import { reducerCases } from "./utils/reducerCases";
+import Layout from "./components/Layout/Layout";
 
 export default function App() {
   const [{ token }, dispatch] = useStateProvider();
@@ -12,9 +13,5 @@ export default function App() {
       dispatch({ type: reducerCases.SET_TOKEN, token });
     }
   }, [token, dispatch]);
-  return (
-    <div>
-      <Login />
-    </div>
-  );
+  return <div>{token ? <Layout /> : <Login />}</div>;
 }
