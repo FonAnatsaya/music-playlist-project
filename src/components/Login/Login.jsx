@@ -23,7 +23,7 @@ const handleButtonClicked = () => {
 export default function Login() {
   return (
     <div className="login">
-      <img src={logo} alt=""></img>
+      <img src={logo} alt="music_logo"></img>
       <button onClick={handleButtonClicked}>Connect App</button>
     </div>
   );
