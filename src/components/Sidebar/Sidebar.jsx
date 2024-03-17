@@ -9,19 +9,23 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="top__links">
-        <div className="logo">
-          <img src={logo} alt="music_logo"></img>
+        <div className="top__links__logo">
+          <img
+            className="top__links__logo__img"
+            src={logo}
+            alt="music_logo"
+          ></img>
         </div>
-        <ul>
-          <li>
+        <ul className="top__links__ul">
+          <li className="top__links__li">
             <MdHomeFilled />
             <span>Home</span>
           </li>
-          <li>
+          <li className="top__links__li">
             <MdSearch />
             <span>Search</span>
           </li>
-          <li>
+          <li className="top__links__li">
             <IoLibrary />
             <span>Your Library</span>
           </li>

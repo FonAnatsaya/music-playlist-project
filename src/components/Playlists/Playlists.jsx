@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./style.css";
 import axios from "axios";
 import { useStateProvider } from "../../utils/StateProvider";
 import { reducerCases } from "../../utils/reducerCases";
@@ -25,10 +26,14 @@ export default function Playlists() {
     getPlaylists();
   }, [token, dispatch]);
   return (
-    <div>
-      <ul>
+    <div className="playlists">
+      <ul className="playlists__ul">
         {playlists.map(({ name, id }) => {
-          return <li key={id}>{name}</li>;
+          return (
+            <li className="playlists__li" key={id}>
+              {name}
+            </li>
+          );
         })}
       </ul>
     </div>

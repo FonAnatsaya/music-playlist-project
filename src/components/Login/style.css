@@ -9,11 +9,11 @@
   gap: 7rem;
 }
 
-img {
+.login_img {
   height: 48vh;
 }
 
-button {
+.login_button {
   color: #363062;
   background-color: #f99417;
   cursor: pointer;
