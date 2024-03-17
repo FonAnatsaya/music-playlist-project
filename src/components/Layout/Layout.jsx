@@ -27,7 +27,7 @@ export default function Layout() {
       dispatch({ type: reducerCases.SET_USERPROFILE, userProfile });
     };
     getUserProfile();
-  }, [dispatch, token]);
+  }, [token, dispatch]);
   return (
     <div className="layout">
       <div className="layout__body">
