@@ -3,6 +3,7 @@ import { reducerCases } from "./reducerCases";
 export const initialState = {
   token: null,
   playlists: [],
+  userProfile: null,
 };
 
 const reducer = (state, action) => {
@@ -17,6 +18,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         playlists: action.playlists,
+      };
+    }
+    case reducerCases.SET_USERPROFILE: {
+      return {
+        ...state,
+        userProfile: action.userProfile,
       };
     }
     default:
