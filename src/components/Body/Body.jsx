@@ -20,12 +20,13 @@ export default function Body() {
           },
         }
       );
+      console.log(response);
       const { id, name, description, images, tracks } = response.data;
       const selectedPlaylist = {
         id,
         name,
         description: description.startsWith("<a") ? "" : description,
-        image: images[0].url,
+        image: images ? images[0].url : "",
         tracks: tracks.items.map(({ track }) => ({
           id: track.id,
           name: track.name,
@@ -50,6 +51,7 @@ export default function Body() {
 
   return (
     <div className="body">
+      {console.log(selectedPlaylist)}
       {selectedPlaylist && (
         <>
           <div className="body__playlist">
