@@ -46,7 +46,23 @@ export default function PlayerControls() {
       dispatch({ type: reducerCases.SET_PLAYING, currentPlaying: null });
     }
   };
-
+  const changeState = async () => {
+    const state = playerState ? "pause" : "play";
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/${state}`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    dispatch({
+      type: reducerCases.SET_PLAYER_STATE,
+      playerState: !playerState,
+    });
+  };
   return (
     <div className="playerControls">
       <div className="playerControls__shuffle playerControls__play__button">
@@ -56,7 +72,11 @@ export default function PlayerControls() {
         <CgPlayTrackPrev onClick={() => changeTrack("previous")} />
       </div>
       <div className="playerControls__state playerControls__play__button">
-        {playerState ? <BsFillPauseCircleFill /> : <BsFillPlayCircleFill />}
+        {playerState ? (
+          <BsFillPauseCircleFill onClick={changeState} />
+        ) : (
+          <BsFillPlayCircleFill onClick={changeState} />
+        )}
       </div>
       <div className="playerControls__next playerControls__play__button">
         <CgPlayTrackNext onClick={() => changeTrack("next")} />
