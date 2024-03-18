@@ -41,6 +41,13 @@ export default function Body() {
     };
     getInitialPlaylist();
   }, [token, dispatch, selectedPlaylistID]);
+
+  const msToMinutesAndSeconds = (ms) => {
+    var minutes = Math.floor(ms / 60000);
+    var seconds = ((ms % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  };
+
   return (
     <div className="body">
       {selectedPlaylist && (
@@ -114,7 +121,7 @@ export default function Body() {
                       <span>{album}</span>
                     </div>
                     <div className="track__col">
-                      <span>{duration}</span>
+                      <span>{msToMinutesAndSeconds(duration)}</span>
                     </div>
                   </div>
                 );
