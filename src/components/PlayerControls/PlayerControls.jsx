@@ -13,6 +13,39 @@ import { reducerCases } from "../../utils/reducerCases";
 
 export default function PlayerControls() {
   const [{ token, playerState }, dispatch] = useStateProvider();
+  const changeTrack = async (trackType) => {
+    await axios.post(
+      `https://api.spotify.com/v1/me/player/${trackType}`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.data !== "") {
+      const { item } = response.data;
+      const currentPlaying = {
+        id: item.id,
+        name: item.name,
+        artists: item.artists.map((artist) => artist.name),
+        image: item.album.images[2].url,
+      };
+      dispatch({ type: reducerCases.SET_PLAYING, currentPlaying });
+    } else {
+      dispatch({ type: reducerCases.SET_PLAYING, currentPlaying: null });
+    }
+  };
 
   return (
     <div className="playerControls">
@@ -20,13 +53,13 @@ export default function PlayerControls() {
         <BsShuffle />
       </div>
       <div className="playerControls__previous playerControls__play__button">
-        <CgPlayTrackPrev />
+        <CgPlayTrackPrev onClick={() => changeTrack("previous")} />
       </div>
       <div className="playerControls__state playerControls__play__button">
         {playerState ? <BsFillPauseCircleFill /> : <BsFillPlayCircleFill />}
       </div>
       <div className="playerControls__next playerControls__play__button">
-        <CgPlayTrackNext />
+        <CgPlayTrackNext onClick={() => changeTrack("next")} />
       </div>
       <div className="playerControls__repeat playerControls__play__button">
         <FiRepeat />
