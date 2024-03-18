@@ -33,5 +33,23 @@ export default function CurrentTrack() {
     getCurrentTrack();
   }, [token, dispatch]);
 
-  return <div>currentrack</div>;
+  return (
+    <div className="currentTrack">
+      {currentPlaying && (
+        <div className="currentTrack__track">
+          <div className="currentTrack__track__image">
+            <img src={currentPlaying.image} alt="currentPlaying" />
+          </div>
+          <div className="currentTrack__track__info">
+            <h4 className="currentTrack__track__info__name">
+              {currentPlaying.name}
+            </h4>
+            <h6 className="currentTrack__track__info__artists">
+              {currentPlaying.artists.join(", ")}
+            </h6>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }

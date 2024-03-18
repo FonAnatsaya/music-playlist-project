@@ -1,0 +1,16 @@
+.currentTrack__track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.currentTrack__track__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+.currentTrack__track__info__name {
+  color: white;
+}
+.currentTrack__track__info__artists {
+  color: #b3b3b3;
+}
