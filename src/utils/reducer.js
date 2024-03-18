@@ -44,6 +44,11 @@ const reducer = (state, action) => {
         ...state,
         currentPlaying: action.currentPlaying,
       };
+    case reducerCases.SET_PLAYER_STATE:
+      return {
+        ...state,
+        playerState: action.playerState,
+      };
     default:
       return state;
   }
