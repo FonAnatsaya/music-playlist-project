@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import "./style.css";
 import { useStateProvider } from "../../utils/StateProvider";
+import { CiVolumeHigh } from "react-icons/ci";
 
 export default function Volume() {
   const [{ token }] = useStateProvider();
