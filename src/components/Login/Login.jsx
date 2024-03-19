@@ -4,7 +4,7 @@ import "./style.css";
 
 const handleButtonClicked = () => {
   const apiUrl = "https://accounts.spotify.com/authorize";
-  const redirectUrl = "http://localhost:3000/";
+  const redirectUrl = "https://music-playlist-project-anatsaya.vercel.app";
   const clientID = "37aa9bed921840bdb0e696daf4705c38";
   const scope = [
     "user-read-private",
