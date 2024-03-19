@@ -4,6 +4,7 @@ import { useStateProvider } from "../../utils/StateProvider";
 import { AiFillClockCircle } from "react-icons/ai";
 import { reducerCases } from "../../utils/reducerCases";
 import "./style.css";
+import logo from "../../assets/music_logo_free.png";
 
 export default function Body() {
   const [{ token, selectedPlaylistID, selectedPlaylist }, dispatch] =
@@ -26,7 +27,7 @@ export default function Body() {
         id,
         name,
         description: description.startsWith("<a") ? "" : description,
-        image: images ? images[0].url : "",
+        image: images ? images[0].url : logo,
         tracks: tracks.items.map(({ track }) => ({
           id: track.id,
           name: track.name,
