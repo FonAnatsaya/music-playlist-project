@@ -1,9 +1,10 @@
 import React from "react";
 import "./style.css";
 import logo from "../../assets/music_logo_free.png";
-import { IoLibrary } from "react-icons/io5";
-import { MdHomeFilled, MdSearch } from "react-icons/md";
 import Playlists from "../Playlists/Playlists";
+import { IoMdAddCircle } from "react-icons/io";
+import { IoHome } from "react-icons/io5";
+import { BsSearchHeart } from "react-icons/bs";
 
 export default function Sidebar() {
   return (
@@ -18,16 +19,16 @@ export default function Sidebar() {
         </div>
         <ul className="top__links__ul">
           <li className="top__links__li">
-            <MdHomeFilled />
+            <IoHome />
             <span>Home</span>
           </li>
           <li className="top__links__li">
-            <MdSearch />
+            <BsSearchHeart />
             <span>Search</span>
           </li>
           <li className="top__links__li">
-            <IoLibrary />
-            <span>Your Library</span>
+            <IoMdAddCircle />
+            <span>Create a new Playlist</span>
           </li>
         </ul>
       </div>
