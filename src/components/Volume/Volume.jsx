@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import "./style.css";
 import { useStateProvider } from "../../utils/StateProvider";
+import { CiVolume } from "react-icons/ci";
 
 export default function Volume() {
   const [{ token }] = useStateProvider();
@@ -22,6 +23,9 @@ export default function Volume() {
   };
   return (
     <div className="volume">
+      <div className="volume_icon">
+        <CiVolume />
+      </div>
       <input
         className="volume__input"
         type="range"

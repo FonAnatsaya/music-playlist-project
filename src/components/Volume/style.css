@@ -1,7 +1,10 @@
 .volume {
   display: flex;
   justify-content: flex-end;
-  align-content: center;
+  align-items: center;
+}
+.volume_icon {
+  font-size: 2.2rem;
 }
 .volume__input {
   width: 15rem;
