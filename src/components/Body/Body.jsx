@@ -7,7 +7,7 @@ import "./style.css";
 import logo from "../../assets/music_logo_free.png";
 
 export default function Body() {
-  const [{ token, selectedPlaylistID, selectedPlaylist }, dispatch] =
+  const [{ token, selectedPlaylistID, selectedPlaylist, deviceID }, dispatch] =
     useStateProvider();
 
   useEffect(() => {
@@ -21,7 +21,6 @@ export default function Body() {
           },
         }
       );
-      console.log(response);
       const { id, name, description, images, tracks } = response.data;
       const selectedPlaylist = {
         id,
@@ -49,10 +48,45 @@ export default function Body() {
     var seconds = ((ms % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   };
-
+  const playTrack = async (
+    id,
+    name,
+    artists,
+    image,
+    context_uri,
+    track_number
+  ) => {
+    const response = await axios.put(
+      `https://api.spotify.com/v1/me/player/play?device_id=${deviceID}`,
+      {
+        context_uri,
+        offset: {
+          position: track_number - 1,
+        },
+        position_ms: 0,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    if (response.status === 204) {
+      const currentPlaying = {
+        id,
+        name,
+        artists,
+        image,
+      };
+      dispatch({ type: reducerCases.SET_PLAYING, currentPlaying });
+      dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: true });
+    } else {
+      dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: true });
+    }
+  };
   return (
     <div className="body">
-      {console.log(selectedPlaylist)}
       {selectedPlaylist && (
         <>
           <div className="body__playlist">
@@ -103,7 +137,20 @@ export default function Body() {
                 index
               ) => {
                 return (
-                  <div className="track__row" key={id}>
+                  <div
+                    className="track__row"
+                    key={id}
+                    onClick={() =>
+                      playTrack(
+                        id,
+                        name,
+                        artists,
+                        image,
+                        context_uri,
+                        track_number
+                      )
+                    }
+                  >
                     <div className="track__col">
                       <span>{index + 1}</span>
                     </div>
