@@ -13,7 +13,8 @@ import { reducerCases } from "../../utils/reducerCases";
 import { IconContext } from "react-icons";
 
 export default function PlayerControls() {
-  const [{ token, playerState, shuffleState }, dispatch] = useStateProvider();
+  const [{ token, playerState, shuffleState, deviceID }, dispatch] =
+    useStateProvider();
   const changeTrack = async (trackType) => {
     await axios.post(
       `https://api.spotify.com/v1/me/player/${trackType}`,
@@ -67,7 +68,7 @@ export default function PlayerControls() {
   const shuffleTrack = async () => {
     let state = !shuffleState;
     await axios.put(
-      `https://api.spotify.com/v1/me/player/shuffle?state=${state}`,
+      `https://api.spotify.com/v1/me/player/shuffle?state=${state}&device_id=${deviceID}`,
       {},
       {
         headers: {
