@@ -10,9 +10,10 @@ import { useStateProvider } from "../../utils/StateProvider";
 import "./style.css";
 import axios from "axios";
 import { reducerCases } from "../../utils/reducerCases";
+import { IconContext } from "react-icons";
 
 export default function PlayerControls() {
-  const [{ token, playerState }, dispatch] = useStateProvider();
+  const [{ token, playerState, shuffleState }, dispatch] = useStateProvider();
   const changeTrack = async (trackType) => {
     await axios.post(
       `https://api.spotify.com/v1/me/player/${trackType}`,
@@ -63,10 +64,33 @@ export default function PlayerControls() {
       playerState: !playerState,
     });
   };
+  const shuffleTrack = async () => {
+    let state = !shuffleState;
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/shuffle?state=${state}`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    dispatch({
+      type: reducerCases.SET_SHUFFLE_STATE,
+      shuffleState: !shuffleState,
+    });
+  };
   return (
     <div className="playerControls">
       <div className="playerControls__shuffle playerControls__play__button">
-        <BsShuffle />
+        <IconContext.Provider
+          value={{
+            className: shuffleState ? "shuffle__color_change active" : "",
+          }}
+        >
+          <BsShuffle onClick={shuffleTrack} />
+        </IconContext.Provider>
       </div>
       <div className="playerControls__previous playerControls__play__button">
         <CgPlayTrackPrev onClick={() => changeTrack("previous")} />

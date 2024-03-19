@@ -15,3 +15,6 @@ svg {
 .playerControls__play__button {
   font-size: 2.2rem;
 }
+.shuffle__color_change.active {
+  color: #f51016;
+}
