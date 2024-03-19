@@ -27,6 +27,21 @@ export default function Layout() {
       dispatch({ type: reducerCases.SET_USERPROFILE, userProfile });
     };
     getUserProfile();
+
+    const getDevice_ID = async () => {
+      const response = await axios.get(
+        "https://api.spotify.com/v1/me/player/devices",
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const deviceID = response.data.devices[0].id;
+      dispatch({ type: reducerCases.SET_DEVICE_ID, deviceID });
+    };
+    getDevice_ID();
   }, [token, dispatch]);
   return (
     <div className="layout">
