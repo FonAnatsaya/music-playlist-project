@@ -9,6 +9,7 @@ export const initialState = {
   currentPlaying: null,
   playerState: false,
   deviceID: null,
+  shuffleState: false,
 };
 
 const reducer = (state, action) => {
@@ -55,6 +56,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         deviceID: action.deviceID,
+      };
+    case reducerCases.SET_SHUFFLE_STATE:
+      return {
+        ...state,
+        shuffleState: action.shuffleState,
       };
     default:
       return state;
